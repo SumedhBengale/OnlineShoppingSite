@@ -138,11 +138,42 @@
         </center>
     {% with ''|center:count as range %}
     <div class='row row-cols-4'>
-        {% for i in range %}
+        {% for key,value in fruits.items %}
+
         <center style='margin-top:20px' class='col'>
-            {% include 'itemCard.html'%}
+            <div class="card p-3">
+                <div class="d-flex justify-content-between align-items-center ">
+                    <div class="mt-2">
+                            <div class="image" style='justify-center margin-right:80px'> <img src="{{value.image}}" width="100%" height="120px"> </div>
+                            <h1 class="main-heading" style='margin-top:100px'>{{key}}</h1>
+                            <div class="d-flex flex-row ">
+                                <div class="ratings"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                <h6 class="text-muted ml-1">Avaliable:{{value.avaliable}}</h6>
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 mb-2"> <span></span>
+                    <div class="colors"> <span></span> <span></span> <span></span> <span></span> </div>
+                </div>
+                <p style='font-size:25px'>
+                    Price:${{value.price}}
+                </p> 
+                
+                <form method='post'>
+                    {% csrf_token %}
+                    <input type="hidden" id="name" name="name" value='{{key}}'>
+                    <input type="hidden" id="av" name="av" value='{{value.avaliable}}'>
+                    <input type="hidden" id="price" name="price" value='{{value.price}}'>
+
+                    <button class="btn"  style='background-color:#12a4d9'>Add to cart</button>
+                </form>
+            </div>
         </center>
         {% endfor %}
+
+
+
         <div class='col'>
         </div> 
     </div>
@@ -181,7 +212,15 @@
         </div> 
     </div>
     {% endwith %}
+    <div>
+        {% for key,value in fruits.items %}
+            <tr>
+                <td> {{key}}:{{value}} </td> 
+            </tr>
 
+        {% endfor %}
+
+    </div>
     
 </body>
 </html>
