@@ -1,5 +1,13 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+from django import template
+register = template.Library()
 
-
-def index(request):
-    return HttpResponse("Hello, This is the Manager Page.")
+@register.inclusion_tag('item.html')
+def manager(request):
+    context={
+        'results': render(request,'item.html'),
+        'count': 5,
+        
+    }
+    return render(request, 'manager.html',context)

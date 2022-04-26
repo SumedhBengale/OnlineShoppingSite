@@ -1,5 +1,13 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
-def index(request):
-    return HttpResponse("Hello, This is the Customer Page.")
+def customer(request):
+    context={
+        'results': render(request,'item.html'),
+        'count': 10,
+    }
+    return render(request,'customer.html',context)
+
+def cart(request):
+    return render(request,'cart.html')
